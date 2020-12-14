@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Soccer17</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+    <meta name="theme-color" content="#00897B" />
+    <meta name="description" content="Football App" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="preconnect" href="https://crests.football-data.org">
+    <link rel="preconnect" href="https://api.football-data.org">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+</head>
+
+<body>
+    <!-- Navigasi -->
+    <div class="navbar-fixed">
+        <nav class="green darken-4" role="navigation">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <a href="#" class="brand-logo" id="logo-container">Soccer<span class="logo">17</span></a>
+                    <a href="./index.html#teams" class="sidenav-trigger" data-target="nav-mobile">
+                        <i class="material-icons">arrow_back</i>
+                    </a>
+
+                    <ul class="topnav right hide-on-med-and-down"></ul>
+
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <ul class="sidenav green darken-4" id="nav-mobile">
+        <li><a class="waves-effect white-text" href="#home">Home</a></li>
+        <li><a class="waves-effect white-text" href="#teams">Teams</a></li>
+        <li><a class="waves-effect white-text" href="#standings">Standings</a></li>
+        <li><a class="waves-effect white-text" href="#saved">Collection</a></li>
+        <li><a class="waves-effect white-text" href="#about">About</a></li>
+    </ul>
+    <!-- Akhir Navigasi -->
+
+    <div class="container" id="body-content">
+        <div class="row">
+            <div class="col s12">
+                <div class="card z-depth-3">
+                    <div class="card-content">
+                        <span class="card-title">Team Information</span>
+                        <div class="row" id="team-information">
+                            <div class="squad-row">
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 m12 l12">
+                                <a href="#" class="btn btn-block btn-large green darken-4 hoverable" id="save">Add To Favourite</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 m12 l12">
+                                <a href="#" class="btn btn-block btn-large red darken-4 hoverable" id="delete">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="page-footer green darken-3">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Premiere League</h5>
+                    <p class="grey-text text-lighten-4">
+                        A football match event held in England</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#home">Home</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#teams">Teams</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#standings">Standings</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#saved">Collection</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#about">About</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2020 Copyright
+                <a class="grey-text text-lighten-4 right" href="#!">More</a>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="https://unpkg.com/snarkdown@1.0.2/dist/snarkdown.umd.js"></script>
+    <script src="js/materialize.min.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/idb.js"></script>
+    <script src="js/db.js"></script>
+    <script>
+        // REGISTER SERVICE WORKER
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", function() {
+                navigator.serviceWorker
+                    .register("/service-worker.js")
+                    .then(function() {
+                        console.log("Pendaftaran ServiceWorker berhasil");
+                    })
+                    .catch(function() {
+                        console.log("Pendaftaran ServiceWorker gagal");
+                    });
+            });
+        } else {
+            console.log("ServiceWorker belum didukung browser ini.");
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var isFromSaved = urlParams.get("saved");
+
+            var btnSave = document.getElementById("save");
+            var btnDelete = document.getElementById("delete");
+            var idParam = parseInt(urlParams.get("id"));
+
+            if (isFromSaved) {
+                btnSave.style.display = 'none';
+                getSavedTeamById();
+            } else {
+                btnDelete.style.display = 'none';
+                var item = getTeamById();
+            }
+
+            btnSave.onclick = function() {
+                console.log("Tombol diklik ");
+                item.then(function(team) {
+                    saveForLater(team);
+                });
+            };
+
+            btnDelete.onclick = function() {
+                console.log("Hapus data");
+                deleteTeam(idParam);
+            }
+        });
+    </script>
+</body>
+
+</html>

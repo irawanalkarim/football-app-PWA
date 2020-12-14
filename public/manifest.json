@@ -1,0 +1,23 @@
+{
+    "name": "Football App",
+    "short_name": "Football App",
+    "description": "Football Application",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#486B00",
+    "theme_color": "#486B00",
+    "icons": [{
+            "src": "img/favicon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "img/favicon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "gcm_sender_id": "503921129857"
+}

@@ -1,0 +1,66 @@
+.row {
+    margin-top: 20px;
+}
+
+img.detail-img {
+    width: 100%;
+    margin: auto;
+}
+
+.matches {
+    padding: 10px;
+}
+
+img.profil {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+img.homme {
+    width: 60%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 50%;
+}
+
+.dash-home {
+    text-align: center;
+}
+
+.dash-home h3 {
+    color: rgb(3, 32, 7);
+}
+
+.dash-home p {
+    color: rgb(30, 104, 40);
+}
+
+span.logo {
+    font-weight: 900;
+    color: rgb(229, 240, 83);
+}
+
+.home {
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+.card-content {
+    color: rgb(30, 104, 40);
+}
+
+img.foto-profil {
+    width: 60%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 50%;
+    border-radius: 10px;
+    border: 5px solid #fff;
+}
